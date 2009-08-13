@@ -40,7 +40,7 @@ in this case your view will look like :
                       :width  => 400,
                       :margin => 100,
                       :xoff   => 20,
-		      						:yoff   => 40
+											:yoff   => 40
   %> 
 
 
@@ -51,6 +51,8 @@ make sure that you install
  1. gem for gbarcode
  2. install native ImageMagick library 
  3. run the rake task : rake barcode_setup
+
+	(If your are on OSX you also need to install the Postscript witch can be installed through Port)
 
 ### Supported Barcode Formats:
 Gbarcode as of now allows us to generate barcodes in following formats:
