@@ -17,7 +17,7 @@ module ActionView
     include ImageMagickWrapper
 
 
-    VALID_BARCODE_OPTIONS = [:encoding_format, :output_format, :width, :height, :scaling_factor, :xoff, :yoff, :margin, :output_method]
+    VALID_BARCODE_OPTIONS = [:encoding_format, :output_format, :width, :height, :scaling_factor, :xoff, :yoff, :margin, :no_ascii, :output_method]
     
     def barcode(id, options = {:encoding_format => DEFAULT_ENCODING })
 
