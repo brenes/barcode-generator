@@ -31,6 +31,7 @@ To customize your barcodes, you can optionally pass following information in you
  + yoff
  + margin
  + no_ascii (accepts boolean true or false, prevents the ascii string from printing at the bottom of the barcode)
+ + output_method (currently accepts 'tag', or 'full_path' for either an image tag or the full file path to the image file)
  
 in this case your view will look like :
 
@@ -39,7 +40,7 @@ in this case your view will look like :
                       :width  => 400,
                       :margin => 100,
                       :xoff   => 20,
-		      :yoff   => 40
+		      						:yoff   => 40
   %> 
 
 

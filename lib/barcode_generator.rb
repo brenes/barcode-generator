@@ -17,16 +17,17 @@ module ActionView
     include ImageMagickWrapper
 
 
-    VALID_BARCODE_OPTIONS = [:encoding_format, :output_format, :width, :height, :scaling_factor, :xoff, :yoff, :margin	]
+    VALID_BARCODE_OPTIONS = [:encoding_format, :output_format, :width, :height, :scaling_factor, :xoff, :yoff, :margin, :output_method]
     
     def barcode(id, options = {:encoding_format => DEFAULT_ENCODING })
 
       options.assert_valid_keys(VALID_BARCODE_OPTIONS)
       output_format = options[:output_format] ? options[:output_format] : DEFAULT_FORMAT
+      output_method = options[:output_method] ? options[:output_method] : DEFAULT_OUTPUT_METHOD
 
       id.upcase!
-      eps = "#{RAILS_ROOT}/public/images/barcodes/#{id}.eps"
-      out = "#{RAILS_ROOT}/public/images/barcodes/#{id}.#{output_format}"
+      eps = File.join(Rails.root, "public", "images", "barcodes", "#{id}.eps")
+      out = File.join(Rails.root, "public", "images", "barcodes", "#{id}.#{output_format}")
       
       #dont generate a barcode again, if already generated
       unless File.exists?(out)
@@ -57,8 +58,13 @@ module ActionView
         #delete the eps image, no need to accummulate cruft
         File.delete(eps)
       end
-      #send the html image tag
-      image_tag("barcodes/#{id}.#{output_format}")
+      if output_method == 'full_path'
+        #send the full filesystem path
+        out
+      else
+        #send the html image tag
+        image_tag("barcodes/#{id}.#{output_format}")
+      end
     end
     
   end
