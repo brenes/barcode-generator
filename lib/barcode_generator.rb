@@ -26,8 +26,8 @@ module ActionView
       output_method = options[:output_method] ? options[:output_method] : DEFAULT_OUTPUT_METHOD
 
       id.upcase!
-      eps = File.join(Rails.root, "public", "images", "barcodes", "#{id}.eps")
-      out = File.join(Rails.root, "public", "images", "barcodes", "#{id}.#{output_format}")
+      eps = File.join(Rails.root, "public", "images", "barcodes", "#{id.gsub(" ", "")}.eps")
+      out = File.join(Rails.root, "public", "images", "barcodes", "#{id.gsub(" ", "")}.#{output_format}")
       
       #dont generate a barcode again, if already generated
       unless File.exists?(out)
@@ -63,7 +63,7 @@ module ActionView
         out
       else
         #send the html image tag
-        image_tag("barcodes/#{id}.#{output_format}")
+        image_tag("barcodes/#{id.gsub(" ", "")}.#{output_format}")
       end
     end
     
